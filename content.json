@@ -1,0 +1,400 @@
+{
+    "lang": "fr",
+    "pageTitle": "MON VÉHICULE - L'automobile d'exception",
+    "nav": {
+        "brandName": "MON VÉHICULE",
+        "logo": "MV",
+        "links": {
+            "home": "Accueil",
+            "vehicles": "Véhicules",
+            "services": "Prestations",
+            "about": "À propos",
+            "contact": "Contact"
+        },
+        "appointmentButton": "Rendez-vous"
+    },
+    "hero": {
+        "logoText": "MV",
+        "title": "MON VÉHICULE",
+        "subtitle": "L'Excellence Automobile Africaine",
+        "mainButton": "Découvrir la Collection",
+        "secondaryButton": "Consultation VIP",
+        "stats": {
+            "experience": "Années d'Expérience",
+            "models": "Modèles Disponibles",
+            "partners": "Entreprises Partenaires"
+        },
+        "scrollIndicator": "Découvrez nos véhicules"
+    },
+    "vehicles": {
+        "title": "MARQUES DISPONIBLES AU SÉNÉGAL",
+        "subtitle": "✨ Découvrez toutes les marques automobiles présentes sur le marché sénégalais avec leurs modèles disponibles ✨",
+        "brandsData": {
+            "toyota": {
+                "name": "Toyota",
+                "description": "✨ Fiabilité japonaise ✨",
+                "models": [
+                    "Corolla", "Camry", "RAV4", "Highlander", "Land Cruiser", "Prado",
+                    "Hilux", "Yaris", "Prius", "Avensis", "Auris", "Verso", "Fortuner"
+                ]
+            },
+            "mercedes": {
+                "name": "Mercedes-Benz",
+                "description": "Luxe allemand",
+                "models": [
+                    "Classe A", "Classe B", "Classe C", "Classe E", "Classe S", "CLA",
+                    "CLS", "GLA", "GLB", "GLC", "GLE", "GLS", "Sprinter", "Vito"
+                ]
+            },
+            "bmw": {
+                "name": "BMW",
+                "description": "Plaisir de conduire",
+                "models": [
+                    "Série 1", "Série 2", "Série 3", "Série 4", "Série 5", "Série 7",
+                    "X1", "X2", "X3", "X4", "X5", "X6", "X7", "Z4", "i3", "i8"
+                ]
+            },
+            "audi": {
+                "name": "Audi",
+                "description": "Technologie avancée",
+                "models": [
+                    "A1", "A3", "A4", "A5", "A6", "A7", "A8", "Q2", "Q3", "Q5",
+                    "Q7", "Q8", "TT", "R8", "e-tron"
+                ]
+            },
+            "volkswagen": {
+                "name": "Volkswagen",
+                "description": "Qualité allemande",
+                "models": [
+                    "Polo", "Golf", "Jetta", "Passat", "Arteon", "Tiguan", "Touareg",
+                    "T-Cross", "T-Roc", "Sharan", "Touran", "Caddy", "Crafter"
+                ]
+            },
+            "peugeot": {
+                "name": "Peugeot",
+                "description": "Élégance française",
+                "models": [
+                    "208", "308", "508", "2008", "3008", "5008", "Partner", "Expert",
+                    "Boxer", "Rifter", "Traveller", "e-208", "e-2008"
+                ]
+            },
+            "renault": {
+                "name": "Renault",
+                "description": "Innovation française",
+                "models": [
+                    "Clio", "Megane", "Talisman", "Captur", "Kadjar", "Koleos",
+                    "Duster", "Kangoo", "Master", "Trafic", "Zoe", "Twingo"
+                ]
+            },
+            "nissan": {
+                "name": "Nissan",
+                "description": "Innovation japonaise",
+                "models": [
+                    "Micra", "Sentra", "Altima", "Maxima", "Juke", "Qashqai", "X-Trail",
+                    "Pathfinder", "Patrol", "Navara", "NV200", "e-NV200", "Leaf"
+                ]
+            },
+            "honda": {
+                "name": "Honda",
+                "description": "Fiabilité éprouvée",
+                "models": [
+                    "City", "Civic", "Accord", "HR-V", "CR-V", "Pilot", "Ridgeline",
+                    "Fit", "Insight", "Odyssey", "Passport"
+                ]
+            },
+            "hyundai": {
+                "name": "Hyundai",
+                "description": "Modernité coréenne",
+                "models": [
+                    "i10", "i20", "i30", "Elantra", "Sonata", "Kona", "Tucson",
+                    "Santa Fe", "Palisade", "H1", "H100", "Ioniq"
+                ]
+            },
+            "kia": {
+                "name": "Kia",
+                "description": "Design audacieux",
+                "models": [
+                    "Picanto", "Rio", "Cerato", "Optima", "Stinger", "Stonic", "Sportage",
+                    "Sorento", "Telluride", "Soul", "Niro", "EV6"
+                ]
+            },
+            "ford": {
+                "name": "Ford",
+                "description": "Héritage américain",
+                "models": [
+                    "Fiesta", "Focus", "Mondeo", "Mustang", "EcoSport", "Kuga", "Edge",
+                    "Explorer", "F-150", "Ranger", "Transit", "Tourneo"
+                ]
+            },
+            "chevrolet": {
+                "name": "Chevrolet",
+                "description": "Puissance américaine",
+                "models": [
+                    "Spark", "Aveo", "Cruze", "Malibu", "Camaro", "Corvette", "Trax",
+                    "Equinox", "Traverse", "Tahoe", "Silverado", "Colorado"
+                ]
+            },
+            "mitsubishi": {
+                "name": "Mitsubishi",
+                "description": "Robustesse japonaise",
+                "models": [
+                    "Mirage", "Lancer", "Eclipse Cross", "ASX", "Outlander", "Pajero",
+                    "L200", "Canter", "i-MiEV"
+                ]
+            },
+            "suzuki": {
+                "name": "Suzuki",
+                "description": "Compacité efficace",
+                "models": [
+                    "Alto", "Swift", "Baleno", "Ciaz", "Ignis", "S-Cross", "Vitara",
+                    "Jimny", "Ertiga", "XL7", "APV", "Carry"
+                ]
+            }
+        }
+    },
+    "services": {
+        "title": "NOS PRESTATIONS PREMIUM",
+        "subtitle": "✨ Des services d'exception pour une expérience automobile sur mesure ✨",
+        "cards": {
+            "location": {
+                "icon": "🚗",
+                "title": "Location Premium",
+                "description": "Location courte et longue durée de véhicules d'exception avec service personnalisé",
+                "features": [
+                    "✓ Véhicules entretenus quotidiennement",
+                    "✓ Livraison à domicile",
+                    "✓ Assurance tous risques incluse",
+                    "✓ Support 24h/7j"
+                ],
+                "button": "💎 Réserver maintenant"
+            },
+            "chauffeur": {
+                "icon": "🤵",
+                "title": "Chauffeur Privé",
+                "description": "Service de chauffeur professionnel pour vos déplacements en toute sérénité",
+                "features": [
+                    "✓ Chauffeurs expérimentés et discrets",
+                    "✓ Véhicules de luxe",
+                    "✓ Ponctualité garantie",
+                    "✓ Service événementiel"
+                ],
+                "button": "🤵 Réserver un chauffeur"
+            },
+            "entretien": {
+                "icon": "✨",
+                "title": "Entretien & Detailing",
+                "description": "Services d'entretien et de detailing haut de gamme pour préserver l'excellence",
+                "features": [
+                    "✓ Detailing complet intérieur/extérieur",
+                    "✓ Entretien mécanique spécialisé",
+                    "✓ Protection céramique",
+                    "✓ Service à domicile disponible"
+                ],
+                "button": "✨ Prendre rendez-vous"
+            },
+            "conseil": {
+                "icon": "💎",
+                "title": "Conseil Personnalisé",
+                "description": "Accompagnement expert pour l'achat, la vente ou l'investissement automobile",
+                "features": [
+                    "✓ Expertise du marché du luxe",
+                    "✓ Évaluation professionnelle",
+                    "✓ Négociation assistée",
+                    "✓ Suivi post-achat"
+                ],
+                "button": "💎 Consultation gratuite"
+            },
+            "achat": {
+                "icon": "🏆",
+                "title": "Vente Premium",
+                "description": "Acquisition de véhicules d'exception avec garantie et service après-vente",
+                "features": [
+                    "✓ Véhicules certifiés et vérifiés",
+                    "✓ Historique complet",
+                    "✓ Garantie constructeur",
+                    "✓ Financement sur mesure"
+                ],
+                "button": "🏆 Voir les offres"
+            },
+            "evenementiel": {
+                "icon": "🎭",
+                "title": "Événementiel",
+                "description": "Location de véhicules d'exception pour vos événements prestigieux",
+                "features": [
+                    "✓ Mariages et cérémonies",
+                    "✓ Événements d'entreprise",
+                    "✓ Tournages et shootings",
+                    "✓ Accompagnement personnalisé"
+                ],
+                "button": "🎭 Organiser un événement"
+            }
+        }
+    },
+    "about": {
+        "title": "À Propos de MON VÉHICULE",
+        "subtitle": "L'excellence automobile africaine portée par une vision audacieuse",
+        "company": {
+            "title": "Notre Entreprise",
+            "icon": "🏢",
+            "paragraphs": [
+                "<strong>Africa Business Manager Company SN</strong> est une entreprise individuelle fondée en décembre 2024, avec une mission claire : valoriser la culture africaine à travers l'excellence automobile.",
+                "Notre plateforme <strong>MON VÉHICULE</strong> est dédiée à la promotion des véhicules de luxe, qu'ils soient proposés par des vendeurs locaux ou issus de notre propre flotte.",
+                "Nous croyons que le luxe n'est pas réservé à une élite étrangère — il est accessible, ici, en Afrique, à ceux qui osent rêver grand."
+            ]
+        },
+        "founder": {
+            "title": "Le Fondateur",
+            "icon": "👨‍💼",
+            "paragraphs": [
+                "<strong>Monsieur ATEKOSSI MAHUZONSOU</strong>, Président Directeur Général, est un jeune entrepreneur visionnaire.",
+                "Son ambition : redéfinir les standards du luxe africain en prouvant qu'on peut rouler en prestige sans quitter le continent.",
+                "Son leadership inspire une nouvelle génération d'acteurs économiques africains à croire en l'excellence locale."
+            ],
+            "quote": "\"Le luxe n'est pas un privilège, c'est une possibilité. Même en Afrique, on peut se permettre l'exception.\""
+        },
+        "mission": {
+            "title": "Notre Mission",
+            "icon": "🎯",
+            "items": [
+                "Soutenir les vendeurs locaux en leur offrant une vitrine digitale haut de gamme",
+                "Proposer des services premium : location, vente, chauffeur privé, entretien, conseil",
+                "Valoriser l'image de l'Afrique à travers une esthétique raffinée et une expérience client irréprochable"
+            ]
+        },
+        "values": {
+            "title": "Nos Valeurs",
+            "icon": "💎",
+            "items": [
+                { "title": "Authenticité", "description": "Nous croyons en la richesse de notre culture et de notre savoir-faire" },
+                { "title": "Excellence", "description": "Chaque détail compte, chaque véhicule est une œuvre" },
+                { "title": "Accessibilité", "description": "Le luxe est une expérience, pas un privilège" },
+                { "title": "Innovation", "description": "Nous utilisons les outils modernes pour servir une vision audacieuse" }
+            ]
+        },
+        "whyUs": {
+            "title": "💼 Pourquoi choisir ABMCompany SN",
+            "intro": "Chez <strong>ABMCompany SN</strong>, nous ne sommes pas simplement un acteur du marché automobile — nous sommes un <strong>réseau de confiance</strong>, connecté à des partenaires de qualité qui font la différence dans tout Dakar.",
+            "points": [
+                {
+                    "title": "Un réseau solide",
+                    "icon": "🤝",
+                    "description": "Nous collaborons avec plusieurs prestataires reconnus dans le domaine de l'automobile, du transport, de l'entretien et du conseil. Ces partenaires sont soigneusement sélectionnés pour leur professionnalisme, leur fiabilité et leur engagement envers l'excellence."
+                },
+                {
+                    "title": "Des modèles accessibles et sécurisés",
+                    "icon": "🚗",
+                    "description": "Grâce à notre réseau, nous proposons des véhicules de luxe à des conditions avantageuses, avec des modalités d'acquisition simples et sécurisées. Que vous soyez acheteur ou locataire, vous bénéficiez d'un accompagnement personnalisé et transparent."
+                },
+                {
+                    "title": "Une expérience sans compromis",
+                    "icon": "🛡️",
+                    "features": [
+                        "✓ Des véhicules inspectés et certifiés",
+                        "✓ Des services associés (chauffeur, entretien, conseil)",
+                        "✓ Une plateforme intuitive et élégante",
+                        "✓ Un accès facilité à des modèles prestigieux, même en Afrique"
+                    ]
+                }
+            ],
+            "conclusion": "<strong>ABMCompany SN</strong>, c'est le luxe en toute confiance, avec des partenaires qui vous accompagnent à chaque étape.",
+            "button": "🤝 Découvrir nos partenaires"
+        }
+    },
+    "statsSection": {
+        "title": "NOS CHIFFRES CLÉS",
+        "subtitle": "✨ L'excellence se mesure en résultats concrets ✨",
+        "mainStats": {
+            "experience": { "title": "Années", "subtitle": "d'Excellence" },
+            "partnerBrands": { "title": "Marques", "subtitle": "Partenaires" },
+            "vehicles": { "title": "Véhicules", "subtitle": "Disponibles" },
+            "partnerCompanies": { "title": "Entreprises", "subtitle": "Partenaires" }
+        },
+        "detailedStats": {
+            "satisfaction": { "title": "% de Satisfaction", "subtitle": "Nos clients nous font confiance" },
+            "response": { "title": "Heures", "subtitle": "Temps de réponse maximum" },
+            "success": { "title": "% de Réussite", "subtitle": "Livraisons dans les délais" }
+        },
+        "cta": {
+            "title": "Rejoignez nos clients satisfaits",
+            "mainButton": "Prendre Rendez-vous",
+            "secondaryButton": "Discuter Maintenant"
+        }
+    },
+    "footer": {
+        "brandName": "MON VÉHICULE",
+        "logo": "MV",
+        "subtitle": "L'excellence automobile africaine à votre service",
+        "contact": {
+            "title": "Contact",
+            "phone": "📞 +221 76 904 79 99",
+            "email": "✉️ abmcompanysn@gmail.com",
+            "location": "📍 Dakar, Sénégal"
+        },
+        "services": {
+            "title": "Services",
+            "items": [
+                "Location Premium",
+                "Chauffeur Privé",
+                "Vente de Luxe",
+                "Conseil Expert"
+            ]
+        },
+        "copyright": "© 2024 MON VÉHICULE - Africa Business Manager Company SN - Tous droits réservés"
+    },
+    "modals": {
+        "brand": {
+            "quoteButton": "💬 Demander un devis pour cette marque",
+            "modelInfoButton": "💬 Demander info"
+        },
+        "contact": {
+            "title": "Contactez-nous",
+            "phoneTitle": "Téléphone",
+            "phoneValue": "+221 76 904 79 99",
+            "emailTitle": "Email",
+            "emailValue": "abmcompanysn@gmail.com",
+            "whatsappTitle": "WhatsApp",
+            "whatsappButton": "Discuter maintenant",
+            "locationTitle": "Localisation",
+            "locationValue": "Dakar, Sénégal",
+            "formTitle": "Envoyez un message",
+            "nameLabel": "Nom *",
+            "phoneLabel": "Téléphone *",
+            "messageLabel": "Message *",
+            "messagePlaceholder": "Décrivez vos besoins...",
+            "submitButton": "💬 Envoyer via WhatsApp"
+        },
+        "appointment": {
+            "title": "Prendre rendez-vous",
+            "subtitle": "Réservez votre consultation personnalisée avec nos experts automobiles",
+            "nameLabel": "Nom complet *",
+            "phoneLabel": "Téléphone *",
+            "emailLabel": "Email *",
+            "serviceLabel": "Service souhaité *",
+            "serviceOptions": {
+                "default": "Choisissez un service",
+                "achat": "💰 Achat de véhicule",
+                "location": "📅 Location",
+                "chauffeur": "🤵 Chauffeur privé",
+                "entretien": "✨ Entretien & Detailing",
+                "conseil": "💎 Conseil personnalisé",
+                "evenementiel": "🎭 Événementiel",
+                "consultation": "💬 Consultation générale"
+            },
+            "dateLabel": "Date souhaitée *",
+            "timeLabel": "Heure souhaitée *",
+            "timeOptions": {
+                "default": "Choisissez une heure",
+                "t1": "09:00 - Matinée",
+                "t2": "10:00 - Matinée",
+                "t3": "11:00 - Fin de matinée",
+                "t4": "14:00 - Début d'après-midi",
+                "t5": "15:00 - Après-midi",
+                "t6": "16:00 - Après-midi",
+                "t7": "17:00 - Fin d'après-midi"
+            },
+            "messageLabel": "Message",
+            "messagePlaceholder": "Décrivez vos besoins ou questions...",
+            "submitButton": "💬 Envoyer via WhatsApp"
+        }
+    }
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Véhicules d'Occasion - MON VÉHICULE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg">
+    <link rel="stylesheet" href="styles.css"> <!-- Assurez-vous d'avoir vos styles principaux ici -->
+    <style>
+        /* Copiez les styles pertinents de index.html ici si nécessaire */
+        .holographic-text {
+            background: linear-gradient(45deg, #8b7355 0%, #a0926b 25%, #d4af37 50%, #a0926b 75%, #8b7355 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: darkHolographicShine 5s ease-in-out infinite;
+            font-weight: 900;
+        }
+        @keyframes darkHolographicShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .ultra-luxury-btn {
+            position: relative;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #000000 100%);
+            color: #d4af37;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            padding: 12px 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .ultra-luxury-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        /* Style pour cacher la barre de défilement */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        @media (max-width: 768px) {
+            .ultra-luxury-btn {
+                padding: 10px 20px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation (simplifiée) -->
+    <nav class="sticky top-0 w-full z-50 backdrop-blur-md bg-black/90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg" alt="Logo MON VÉHICULE" class="w-10 h-10 rounded-full object-cover">
+                    <span class="text-white text-xl font-bold">MON VÉHICULE</span>
+                </a>
+                <div class="hidden lg:flex items-center">
+                    <a href="index.html" class="ultra-luxury-btn">
+                        Retour à l'accueil
+                    </a>
+                </div>
+                <!-- Bouton Hamburger pour mobile -->
+                <div class="lg:hidden">
+                    <button id="menu-btn" class="text-white focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-black/95 absolute top-16 left-0 w-full">
+            <div class="flex flex-col items-center space-y-6 py-8">
+                <a href="index.html" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu()">Accueil</a>
+                <a href="index.html#vehicules" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu()">Marques</a>
+                <a href="index.html#contact" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu()">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h1 class="text-5xl font-bold text-center mb-12 holographic-text">Tous nos Véhicules d'Occasion</h1>
+
+            <!-- Grille des véhicules -->
+            <div id="vehicles-by-brand-container" class="space-y-16">
+                <!-- Les cartes seront injectées ici -->
+                <div class="text-center text-gray-500">
+                    <p>Chargement des véhicules...</p>
+                    <div class="mt-4 h-8 w-8 mx-auto border-4 border-t-yellow-500 border-gray-200 rounded-full animate-spin"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (simplifié) -->
+    <footer class="bg-black text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-500">© 2024 MON VÉHICULE - Africa Business Manager Company SN - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        function renderVehiclesByBrand(vehicles) {
+            const container = document.getElementById('vehicles-by-brand-container');
+            container.innerHTML = '';
+
+            if (vehicles.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-500">Aucun véhicule d\'occasion disponible pour le moment.</p>';
+                return;
+            }
+
+            // Regrouper les véhicules par marque
+            const vehiclesByBrand = vehicles.reduce((acc, vehicle) => {
+                (acc[vehicle.marque] = acc[vehicle.marque] || []).push(vehicle);
+                return acc;
+            }, {});
+
+            // Créer une section pour chaque marque
+            for (const brand in vehiclesByBrand) {
+                const brandSection = document.createElement('div');
+                brandSection.className = 'brand-section';
+
+                const brandTitle = document.createElement('h2');
+                brandTitle.className = 'text-3xl font-bold text-gray-800 mb-6';
+                brandTitle.textContent = brand;
+                brandSection.appendChild(brandTitle);
+
+                const brandGrid = document.createElement('div');
+                brandGrid.className = 'flex gap-6 overflow-x-auto pb-4 hide-scrollbar';
+
+                vehiclesByBrand[brand].forEach(vehicle => {
+                    const card = document.createElement('div');
+                    card.className = 'flex-shrink-0 w-72 md:w-80 border rounded-2xl overflow-hidden shadow-lg transition-transform hover:-translate-y-2 group bg-white';
+                    card.innerHTML = `
+                        <a href="detail-vehicule.html?id=${vehicle.id}" class="block h-full flex flex-col">
+                            <img src="${vehicle.image}" alt="${vehicle.marque} ${vehicle.modele}" class="w-full h-48 object-cover">
+                            <div class="p-4 flex flex-col flex-grow">
+                                <h3 class="text-lg font-bold text-gray-900 truncate">${vehicle.marque} ${vehicle.modele}</h3>
+                                <p class="text-sm text-gray-500">${vehicle.annee} - ${vehicle.kilometrage}</p>
+                                <p class="text-xl font-black text-yellow-600 mt-auto pt-2">${vehicle.prix}</p>
+                            </div>
+                        </a>`;
+                    brandGrid.appendChild(card);
+                });
+
+                brandSection.appendChild(brandGrid);
+                container.appendChild(brandSection);
+            }
+        }
+
+        async function initializePage() {
+            const container = document.getElementById('vehicles-by-brand-container');
+            if (!container) return;
+
+            try {
+                const allVehiclesData = await fetchWithCache('vehiclesCache', GAS_URL);
+                if (!Array.isArray(allVehiclesData)) throw new Error("Les données reçues ne sont pas un tableau.");
+                renderVehiclesByBrand(allVehiclesData);
+            } catch (error) {
+                console.error("Erreur:", error);
+                container.innerHTML = '<p class="col-span-full text-center text-red-500">Erreur lors du chargement des véhicules.</p>';
+            } ;
+        }
+
+        document.addEventListener('DOMContentLoaded', initializePage);
+
+        // Gestion du menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
