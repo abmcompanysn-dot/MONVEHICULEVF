@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html lang="fr"><head>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Parcourez notre sélection de véhicules d'occasion de luxe à Dakar. Des modèles garantis et vérifiés par MON VÉHICULE et nos partenaires.">
     <title>Nos Véhicules d'Occasion - MON VÉHICULE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
@@ -56,6 +57,11 @@
             .ultra-luxury-btn {
                 padding: 10px 20px;
                 font-size: 0.8rem;
+            }
+
+            /* Supprimer l'effet de lueur sur les titres sur mobile */
+            @media (max-width: 768px) {
+                .holographic-text { text-shadow: none; }
             }
         }
     </style>
