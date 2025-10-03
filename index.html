@@ -872,6 +872,24 @@
             footer .copyright-text {
                 display: none;
             }
+
+            /* Styles pour l'accordéon du footer */
+            .footer-accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+            }
+            .footer-accordion-content.open {
+                max-height: 200px; /* Hauteur suffisante pour le contenu */
+            }
+            .footer-accordion-header {
+                cursor: pointer;
+            }
+            .footer-arrow {
+                transition: transform 0.3s ease;
+                display: inline-block; /* Nécessaire pour la transformation */
+            }
+            .open .footer-arrow { transform: rotate(180deg); }
             
             .stat-number {
                 font-size: 1.5rem !important;
@@ -2590,8 +2608,11 @@
                 </div>
                 
                 <div class="text-left">
-                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
-                    <div class="space-y-2 text-gray-400">
+                    <div id="footer-contact-header" class="footer-accordion-header flex justify-between items-center mb-4">
+                        <h4 class="text-lg font-semibold">Contact</h4>
+                        <span class="footer-arrow text-yellow-400">▼</span>
+                    </div>
+                    <div id="footer-contact-content" class="footer-accordion-content space-y-2 text-gray-400">
                         <a href="tel:+221769047999" class="flex items-center justify-start gap-2 hover:text-yellow-400 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg>
                             +221 76 904 79 99</a>
@@ -2605,8 +2626,11 @@
                 </div>
                 
                 <div class="text-left">
-                    <h4 class="text-lg font-semibold mb-4">Services</h4>
-                    <div class="space-y-2 text-gray-400">
+                    <div id="footer-services-header" class="footer-accordion-header flex justify-between items-center mb-4">
+                        <h4 class="text-lg font-semibold">Services</h4>
+                        <span class="footer-arrow text-yellow-400">▼</span>
+                    </div>
+                    <div id="footer-services-content" class="footer-accordion-content space-y-2 text-gray-400">
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Location Premium</a>
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Chauffeur Privé</a>
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Vente de Luxe</a>
