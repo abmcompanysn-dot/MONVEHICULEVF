@@ -861,6 +861,17 @@
                 grid-template-columns: 1fr;
                 gap: 4px;
             }
+
+            /* Justifier le texte dans la section "À propos" sur mobile */
+            #apropos .about-card p, #apropos .about-card blockquote {
+                text-align: justify;
+                hyphens: auto; /* Optionnel, pour une meilleure césure */
+            }
+
+            /* Cacher le copyright sur mobile */
+            footer .copyright-text {
+                display: none;
+            }
             
             .stat-number {
                 font-size: 1.5rem !important;
@@ -897,6 +908,7 @@
                     <a href="#accueil" class="text-white hover:text-yellow-400 transition-colors" onclick="scrollTo('accueil')">Accueil</a>
                     <a href="#vehicules" class="text-white hover:text-yellow-400 transition-colors" onclick="scrollTo('vehicules')">Véhicules</a>
                     <a href="#prestations" class="text-white hover:text-yellow-400 transition-colors" onclick="scrollTo('prestations')">Prestations</a>
+                <a href="voitures-occasion.html" class="text-white hover:text-yellow-400 transition-colors">Nos Occasions</a>
                     <a href="#apropos" class="text-white hover:text-yellow-400 transition-colors" onclick="scrollTo('apropos')">À propos</a>
                     <a href="#contact" class="text-white hover:text-yellow-400 transition-colors" onclick="openContactModal()">Contact</a>
                 </div>
@@ -918,6 +930,7 @@
         <div id="mobile-menu" class="hidden lg:hidden bg-black/95 absolute top-16 left-0 w-full">
             <div class="flex flex-col items-center space-y-6 py-8">
                 <a href="#accueil" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); scrollTo('accueil');">Accueil</a>
+                <a href="voitures-occasion.html" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu()">Nos Occasions</a>
                 <a href="#vehicules" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); scrollTo('vehicules');">Véhicules</a>
                 <a href="#prestations" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); scrollTo('prestations');">Prestations</a>
                 <a href="#apropos" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); scrollTo('apropos');">À propos</a>
@@ -2568,17 +2581,15 @@
     <footer class="bg-black text-white py-12">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <div class="flex items-center justify-center md:justify-start space-x-3 mb-4">
-                        <div class="w-10 h-10 gold-gradient rounded-full flex items-center justify-center">
-                            <span class="text-black font-bold">MV</span>
-                        </div>
-                        <span class="text-xl font-bold">MON VÉHICULE</span>
+                <div class="flex flex-col items-start text-left space-y-4">
+                    <div class="flex items-center justify-start space-x-3">
+                        <img src="https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg" alt="Logo MON VÉHICULE" class="w-10 h-10 rounded-full object-cover">
+                        <span class="text-2xl font-bold">MON VÉHICULE</span>
                     </div>
                     <p class="text-gray-400">L'excellence automobile africaine à votre service.</p>
                 </div>
                 
-                <div class="hidden md:block text-center md:text-left">
+                <div class="text-left">
                     <h4 class="text-lg font-semibold mb-4">Contact</h4>
                     <div class="space-y-2 text-gray-400">
                         <a href="tel:+221769047999" class="flex items-center justify-start gap-2 hover:text-yellow-400 transition-colors">
@@ -2593,7 +2604,7 @@
                     </div>
                 </div>
                 
-                <div class="hidden md:block text-center md:text-left">
+                <div class="text-left">
                     <h4 class="text-lg font-semibold mb-4">Services</h4>
                     <div class="space-y-2 text-gray-400">
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Location Premium</a>
@@ -2605,7 +2616,7 @@
             </div>
             
             <div class="border-t border-gray-800 pt-8 text-center">
-                <p class="text-gray-500">© 2024 MON VÉHICULE - Africa Business Manager Company SN - Tous droits réservés</p>
+                <p class="text-gray-500 copyright-text">© 2024 MON VÉHICULE - Africa Business Manager Company SN - Tous droits réservés</p>
             </div>
         </div>
     </footer>
