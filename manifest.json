@@ -1,0 +1,27 @@
+{
+    "name": "MON VÉHICULE",
+    "short_name": "MonVéhicule",
+    "description": "L'excellence automobile africaine. Achat, vente, location et services premium pour véhicules de luxe au Sénégal.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#d4af37",
+    "icons": [
+        {
+            "src": "https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg",
+            "purpose": "maskable"
+        }
+    ]
+}
