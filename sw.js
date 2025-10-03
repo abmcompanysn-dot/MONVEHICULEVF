@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mon-vehicule-cache-v2'; // Version du cache incrémentée
+const CACHE_NAME = 'mon-vehicule-cache-v3'; // Version du cache incrémentée pour les nouvelles stratégies
 const urlsToCache = [
     '/',
     '/index.html',
@@ -45,25 +45,26 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
     const { request } = event;
 
-    // Stratégie "Stale-While-Revalidate" pour les requêtes API (Google Apps Script)
-    if (request.url.includes('script.google.com')) {
+    // Stratégie "Stale-While-Revalidate" pour les requêtes API et les images.
+    // Cela sert le contenu depuis le cache pour la vitesse, puis met à jour en arrière-plan.
+    if (request.url.includes('script.google.com') || request.destination === 'image') {
         event.respondWith(
             caches.open(CACHE_NAME).then(cache => {
                 return cache.match(request).then(cachedResponse => {
                     const fetchPromise = fetch(request).then(networkResponse => {
-                        // Met à jour le cache avec la nouvelle réponse
+                        // Met à jour le cache avec la nouvelle réponse pour la prochaine visite
                         cache.put(request, networkResponse.clone());
                         return networkResponse;
                     });
-                    // Retourne la réponse du cache immédiatement, puis met à jour en arrière-plan
+                    // Retourne la réponse du cache immédiatement si elle existe, sinon attend la réponse du réseau.
                     return cachedResponse || fetchPromise;
                 });
             })
         );
         return;
     }
-
-    // Stratégie "Cache first" pour les autres requêtes (App Shell, images, etc.)
+    
+    // Stratégie "Cache first" pour les autres ressources (HTML, CSS, JS de l'App Shell).
     // avec fallback vers la page offline pour la navigation
     event.respondWith(
         caches.match(request).then(cachedResponse => {
@@ -71,14 +72,22 @@ self.addEventListener('fetch', event => {
             if (cachedResponse) {
                 return cachedResponse;
             }
-
+    
             // Sinon, on va la chercher sur le réseau
-            return fetch(request).catch(() => {
-                // Si la requête échoue (hors ligne) et que c'est une page HTML
-                if (request.mode === 'navigate') {
-                    return caches.match('/offline.html');
-                }
-            });
+            return fetch(request)
+                .then(networkResponse => {
+                    // Optionnel: Mettre en cache les nouvelles ressources découvertes
+                    return caches.open(CACHE_NAME).then(cache => {
+                        cache.put(request, networkResponse.clone());
+                        return networkResponse;
+                    });
+                })
+                .catch(() => {
+                    // Si la requête échoue (hors ligne) et que c'est une page HTML, on affiche la page offline.
+                    if (request.mode === 'navigate') {
+                        return caches.match('/offline.html');
+                    }
+                });
         })
     );
 });
