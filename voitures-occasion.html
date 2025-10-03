@@ -7,6 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
     <link rel="icon" href="https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg">
+
+    <!-- PWA Manifest & Theme Color -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+
     <link rel="stylesheet" href="styles.css"> <!-- Assurez-vous d'avoir vos styles principaux ici -->
     <style>
         /* Copiez les styles pertinents de index.html ici si nécessaire */
@@ -188,6 +193,19 @@
 
         function closeMobileMenu() {
             mobileMenu.classList.add('hidden');
+        }
+
+        // Enregistrement du Service Worker pour la PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker enregistré avec succès:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('🔥 Échec de l\'enregistrement du Service Worker:', error);
+                    });
+            });
         }
     </script>
 </body>
