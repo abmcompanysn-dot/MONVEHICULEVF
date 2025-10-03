@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mode Hors Ligne - MON VÉHICULE</title>
+    <link rel="icon" href="https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg">
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.2rem;
+            max-width: 400px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.8;
+        }
+        .road {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: #333;
+            border-top: 5px dashed #555;
+        }
+        .car {
+            position: absolute;
+            bottom: 60px;
+            left: -200px; /* Start off-screen */
+            width: 150px;
+            animation: drive 8s ease-in-out infinite;
+        }
+        .car-body {
+            fill: #d4af37;
+        }
+        .car-window {
+            fill: #1a1a1a;
+        }
+        .car-wheel {
+            fill: #222;
+            animation: spin 0.5s linear infinite;
+            transform-origin: center;
+        }
+        @keyframes drive {
+            0% {
+                transform: translateX(0);
+            }
+            40%, 60% {
+                transform: translateX(calc(50vw - 75px)); /* Drive to center and pause */
+            }
+            100% {
+                transform: translateX(calc(100vw + 200px)); /* Drive off-screen */
+            }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mode Hors Ligne</h1>
+        <p>Il semble que vous n'êtes pas connecté à Internet. Veuillez vérifier votre connexion et réessayer.</p>
+    </div>
+
+    <div class="road"></div>
+    <svg class="car" viewBox="0 0 200 70">
+        <g>
+            <path class="car-body" d="M10 50 C10 40, 20 40, 30 40 L60 20 L140 20 L170 40 C180 40, 190 40, 190 50 L190 60 L10 60 Z" />
+            <path class="car-window" d="M65 25 L135 25 L160 40 L70 40 Z" />
+            <circle class="car-wheel" cx="40" cy="60" r="10" />
+            <circle class="car-wheel" cx="160" cy="60" r="10" />
+        </g>
+    </svg>
+
+</body>
+</html>
