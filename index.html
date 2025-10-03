@@ -692,6 +692,12 @@
             .ultra-luxury-btn { padding: 12px 24px; font-size: 0.9rem; }
         }
 
+        /* Ajustement de la police pour la section Partage sur mobile */
+        @media (max-width: 768px) {
+            #partage h2 { font-size: 2.5rem; } /* Réduction de la taille du titre */
+            #partage p { font-size: 1rem; } /* Réduction de la taille du paragraphe */
+        }
+
         /* Bordures dorées animées */
         .luxury-border {
             position: relative;
@@ -979,11 +985,11 @@
 
             <!-- Actions Principales -->
             <div class="hero-actions flex flex-col md:flex-row gap-6 mb-12">
-                <button class="luxury-btn-animated px-8 py-4 text-lg flex items-center justify-center" onclick="scrollTo('vehicules')">
+                <a href="voitures-occasion.html" class="luxury-btn-animated px-8 py-4 text-lg flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path></svg>
                     <span class="btn-text">Découvrir la Collection</span>
                     <div class="btn-shine"></div>
-                </button>
+                </a>
                 <button class="outline-btn-animated px-8 py-4 text-lg flex items-center justify-center" onclick="openModal()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M6 5h12l3 5l-8.5 9.5a0.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5"></path><path d="M10 12l-2 -2.2l.6 -1"></path></svg>
                     <span class="btn-text">Consultation VIP</span>
@@ -2612,11 +2618,8 @@
                 </div>
                 
                 <div class="text-left">
-                    <div id="footer-contact-header" class="footer-accordion-header flex justify-between items-center mb-4">
-                        <h4 class="text-lg font-semibold">Contact</h4>
-                        <span class="footer-arrow text-yellow-400">▼</span>
-                    </div>
-                    <div id="footer-contact-content" class="footer-accordion-content space-y-2 text-gray-400">
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <div class="space-y-2 text-gray-400">
                         <a href="tel:+221769047999" class="flex items-center justify-start gap-2 hover:text-yellow-400 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg>
                             +221 76 904 79 99</a>
@@ -2630,11 +2633,8 @@
                 </div>
                 
                 <div class="text-left">
-                    <div id="footer-services-header" class="footer-accordion-header flex justify-between items-center mb-4">
-                        <h4 class="text-lg font-semibold">Services</h4>
-                        <span class="footer-arrow text-yellow-400">▼</span>
-                    </div>
-                    <div id="footer-services-content" class="footer-accordion-content space-y-2 text-gray-400">
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <div class="space-y-2 text-gray-400">
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Location Premium</a>
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Chauffeur Privé</a>
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Vente de Luxe</a>
