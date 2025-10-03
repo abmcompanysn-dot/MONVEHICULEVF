@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html><html lang="fr"><head>
 <html lang="fr"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,14 +21,31 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "AutomotiveBusiness",
+      "@type": "LocalBusiness",
       "name": "MON VÉHICULE",
       "description": "L'excellence automobile africaine. Achat, vente, location et services premium pour véhicules de luxe au Sénégal.",
+      "image": "https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg",
+      "url": "https://monvehiculevf.vercel.app/",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Dakar",
         "addressCountry": "SN"
       },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "19:00"
+        }
+      ],
       "telephone": "+221769047999",
       "email": "abmcompanysn@gmail.com"
     }
@@ -77,6 +94,26 @@
         .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Styles pour l'accordéon FAQ */
+        .faq-accordion-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .faq-accordion-header {
+            cursor: pointer;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        .faq-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1rem;
+            color: #4b5563;
         }
         
         .modal {
@@ -950,6 +987,8 @@
                 <a href="#vehicules" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); scrollTo('vehicules');">Véhicules</a>
                 <a href="#prestations" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); scrollTo('prestations');">Prestations</a>
                 <a href="#apropos" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); scrollTo('apropos');">À propos</a>
+                <a href="#" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); openFaqModal();">FAQ</a>
+                <a href="https://abmcy.vercel.app/" target="_blank" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu()">Notre Écosystème</a>
                 <a href="#contact" class="text-white text-lg hover:text-yellow-400 transition-colors" onclick="closeMobileMenu(); openContactModal();">Contact</a>
                 <button class="luxury-btn mt-4" onclick="closeMobileMenu(); openModal();">
                     Rendez-vous
@@ -1418,7 +1457,7 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Découvrez toutes les marques automobiles présentes sur le marché sénégalais avec leurs modèles disponibles</p>
             </div>
 
-            <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6" id="brands-grid"><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+            <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6" id="brands-grid"><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('toyota')" aria-label="Voir les modèles Toyota">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1429,7 +1468,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">TOYOTA</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mercedes')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mercedes')" aria-label="Voir les modèles Mercedes-Benz">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1440,7 +1479,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">MERCEDES</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('bmw')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('bmw')" aria-label="Voir les modèles BMW">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1451,7 +1490,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">BMW</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('audi')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('audi')" aria-label="Voir les modèles Audi">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1462,7 +1501,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">AUDI</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('volkswagen')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('volkswagen')" aria-label="Voir les modèles Volkswagen">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1473,7 +1512,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">VOLKSWAG</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('peugeot')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('peugeot')" aria-label="Voir les modèles Peugeot">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1484,7 +1523,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">PEUGEOT</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('renault')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('renault')" aria-label="Voir les modèles Renault">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1495,7 +1534,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">RENAULT</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('nissan')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('nissan')" aria-label="Voir les modèles Nissan">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1506,7 +1545,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">NISSAN</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('honda')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('honda')" aria-label="Voir les modèles Honda">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1517,7 +1556,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">HONDA</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('hyundai')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('hyundai')" aria-label="Voir les modèles Hyundai">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1528,7 +1567,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">HYUNDAI</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('kia')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('kia')" aria-label="Voir les modèles Kia">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1539,7 +1578,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">KIA</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('ford')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('ford')" aria-label="Voir les modèles Ford">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1550,7 +1589,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">FORD</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('chevrolet')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('chevrolet')" aria-label="Voir les modèles Chevrolet">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1561,7 +1600,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">CHEVROLE</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mitsubishi')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mitsubishi')" aria-label="Voir les modèles Mitsubishi">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1572,7 +1611,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">MITSUBIS</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('suzuki')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('suzuki')" aria-label="Voir les modèles Suzuki">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1583,7 +1622,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">SUZUKI</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jetour')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jetour')" aria-label="Voir les modèles JETOUR">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1594,7 +1633,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">JETOUR</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mahindra')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mahindra')" aria-label="Voir les modèles Mahindra">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1605,7 +1644,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">MAHINDRA</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('baic')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('baic')" aria-label="Voir les modèles BAIC">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1616,7 +1655,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">BAIC</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jmc')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jmc')" aria-label="Voir les modèles JMC">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1627,7 +1666,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">JMC</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jac')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jac')" aria-label="Voir les modèles JAC">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1638,7 +1677,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">JAC</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('isuzu')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('isuzu')" aria-label="Voir les modèles ISUZU">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1649,7 +1688,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">ISUZU</text>
                         </svg>
                     </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('voituredelocation')">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('voituredelocation')" aria-label="Voir les modèles voiture de location">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -2927,7 +2966,7 @@
     <!-- Footer -->
     <footer class="bg-black text-white py-12">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="flex flex-col items-start text-left space-y-4">
                     <div class="flex items-center justify-start space-x-3">
                         <img src="https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg" alt="Logo MON VÉHICULE" class="w-10 h-10 rounded-full object-cover">
@@ -2960,6 +2999,17 @@
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Conseil Expert</a>
                     </div>
                 </div>
+
+                <div class="text-left md:text-left">
+                    <h4 class="text-lg font-semibold mb-4">Ressources</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <a href="#" onclick="openFaqModal()" class="block hover:text-yellow-400 transition-colors">FAQ</a>
+                        <a href="https://abmcy.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-yellow-400 transition-colors">
+                            <img src="https://i.postimg.cc/dvjbX8zD/nano-banana-2025-09-30-T14-43-19.png" alt="Logo ABMCY" class="w-5 h-5 rounded-full">
+                            <span>Notre Écosystème ABMCY</span>
+                        </a>
+                    </div>
+                </div>
             </div>
             
             <div class="border-t border-gray-800 pt-8 text-center">
@@ -2967,6 +3017,23 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modale FAQ -->
+    <div id="faq-modal" class="modal">
+        <div class="modal-content">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-900">Questions Fréquemment Posées</h2>
+                    <button onclick="closeFaqModal()" class="text-gray-500 hover:text-gray-700 text-2xl">✕</button>
+                </div>
+                <div id="faq-accordion" class="space-y-2 max-h-[60vh] overflow-y-auto pr-4">
+                    <!-- Les questions et réponses seront injectées ici par JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="config.js"></script>
@@ -4079,6 +4146,16 @@
             document.getElementById('brand-modal').classList.remove('show');
             document.body.style.overflow = 'auto';
         }
+        
+        function openFaqModal() {
+            document.getElementById('faq-modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFaqModal() {
+            document.getElementById('faq-modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
 
         function closeFavoritesModal() {
             document.getElementById('favorites-modal').classList.remove('show');
@@ -4250,6 +4327,12 @@ Merci de me recontacter !`;
             }
         });
 
+        document.getElementById('faq-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFaqModal();
+            }
+        });
+
         // Soumission du formulaire de rendez-vous
         function submitAppointment(event) {
             event.preventDefault();
@@ -4376,6 +4459,53 @@ Merci de confirmer ce rendez-vous !`;
                 }
             });
         });
+
+        // Génération de l'accordéon FAQ
+        function setupFaqAccordion() {
+            const faqData = [
+                {
+                    question: "Quels types de véhicules proposez-vous ?",
+                    answer: "Nous proposons une large gamme de véhicules de luxe, incluant des berlines, des SUV, des sportives et des pick-ups. Nous travaillons avec des marques prestigieuses comme Mercedes-Benz, BMW, Audi, Toyota, et bien d'autres. Nous avons également des véhicules d'occasion certifiés."
+                },
+                {
+                    question: "Comment puis-je louer un véhicule ?",
+                    answer: "Pour louer un véhicule, vous pouvez nous contacter directement via le formulaire de rendez-vous en sélectionnant 'Location', ou nous appeler. Nous vous guiderons à travers les options disponibles et les documents nécessaires (permis de conduire valide, pièce d'identité)."
+                },
+                {
+                    question: "Vendez-vous des véhicules neufs ou seulement d'occasion ?",
+                    answer: "Notre spécialité est le véhicule de luxe, qu'il soit neuf (via nos partenaires concessionnaires) ou d'occasion. Tous nos véhicules d'occasion sont rigoureusement inspectés et certifiés pour garantir leur qualité et leur fiabilité."
+                },
+                {
+                    question: "Où êtes-vous situés ?",
+                    answer: "Notre siège est basé à Dakar, au Sénégal. Nous offrons des services de livraison de véhicules dans toute la région pour plus de commodité."
+                },
+                {
+                    question: "Qu'est-ce que l'écosystème ABMCY ?",
+                    answer: "ABMCY (Africa Business Manager Company) est notre société mère. MON VÉHICULE est l'une des branches de cet écosystème qui vise à promouvoir l'excellence et l'entrepreneuriat en Afrique dans divers secteurs, en commençant par l'automobile de luxe."
+                }
+            ];
+
+            const accordionContainer = document.getElementById('faq-accordion');
+            accordionContainer.innerHTML = faqData.map(item => `
+                <div class="faq-accordion-item">
+                    <div class="faq-accordion-header">
+                        <span>${item.question}</span>
+                        <span class="transform transition-transform duration-300">▼</span>
+                    </div>
+                    <div class="faq-accordion-content">
+                        <p class="pb-4">${item.answer}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.faq-accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    header.nextElementSibling.classList.toggle('max-h-96');
+                    header.nextElementSibling.classList.toggle('pt-2');
+                    header.querySelector('span:last-child').classList.toggle('rotate-180');
+                });
+            });
+        }
 
         // Carrousel Infini - Pas de JavaScript nécessaire, tout en CSS
 
@@ -4884,7 +5014,8 @@ Merci !`;
                 const brandData = brandsData[brandId];
                 const brandCard = document.createElement('div');
                 brandCard.className = 'car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal';
-                brandCard.onclick = () => openBrandModal(brandId);
+                brandCard.setAttribute('onclick', `openBrandModal('${brandId}')`);
+                brandCard.setAttribute('aria-label', `Voir les modèles ${brandData.name}`);
                 
                 brandCard.innerHTML = `
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
@@ -4913,6 +5044,9 @@ Merci !`;
 
             // Générer le QR Code
             generateQRCode();
+
+            // Générer la FAQ
+            setupFaqAccordion();
 
 
             // Charger les marques sauvegardées
