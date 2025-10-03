@@ -892,6 +892,12 @@
             #occasion .flex.justify-between {
                 flex-direction: column;
             }
+
+            /* Justifier le texte dans la section "À propos" sur mobile */
+            #apropos .about-card p, #apropos .about-card blockquote {
+                text-align: justify;
+                hyphens: auto; /* Optionnel, pour une meilleure césure */
+            }
         }
 
         .model-card {
@@ -1423,12 +1429,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">TOYOTA</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Toyota</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Leader mondial de la fiabilité automobile</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">20 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mercedes')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1439,12 +1440,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">MERCEDES</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Mercedes-Benz</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">L'étoile du luxe automobile allemand</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">24 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('bmw')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1455,12 +1451,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">BMW</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">BMW</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Le plaisir de conduire à l'état pur</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">9 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('audi')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1471,12 +1462,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">AUDI</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Audi</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Vorsprung durch Technik - L'avance par la technologie</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">81 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('volkswagen')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1487,12 +1473,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">VOLKSWAG</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Volkswagen</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Das Auto - La voiture par excellence</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">4 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('peugeot')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1503,12 +1484,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">PEUGEOT</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Peugeot</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Motion &amp; Emotion - L'élégance française</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">7 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('renault')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1519,12 +1495,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">RENAULT</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Renault</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Passion for life - La passion de vivre</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">4 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('nissan')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1535,12 +1506,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">NISSAN</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Nissan</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Innovation qui excite</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">5 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('honda')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1551,12 +1517,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">HONDA</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Honda</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">The Power of Dreams</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">9 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('hyundai')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1567,12 +1528,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">HYUNDAI</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Hyundai</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">New Thinking. New Possibilities.</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">6 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('kia')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1583,12 +1539,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">KIA</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Kia</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">The Power to Surprise</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">5 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('ford')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1599,12 +1550,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">FORD</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Ford</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Built Ford Tough</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">3 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('chevrolet')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1615,12 +1561,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">CHEVROLE</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Chevrolet</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Find New Roads</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">0 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mitsubishi')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1631,12 +1572,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">MITSUBIS</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Mitsubishi</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Drive your Ambition</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">5 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('suzuki')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1647,12 +1583,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">SUZUKI</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Suzuki</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Way of Life</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">12 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jetour')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1663,12 +1594,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">JETOUR</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">JETOUR</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Jetour, l’élégance chinoise en mouvement — des SUV conçus pour séduire, performer et vous démarquer à chaque trajet.</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">5 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('mahindra')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1679,12 +1605,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">MAHINDRA</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">Mahindra</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Mahindra — puissance, fiabilité et audace sur toutes les routes, conçue pour ceux qui bâtissent l’avenir.</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">2 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('baic')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1695,12 +1616,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">BAIC</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">BAIC</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">l’innovation chinoise au service de la route, avec des SUV robustes, élégants et conçus pour repousser les limites</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">4 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jmc')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1711,12 +1627,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">JMC</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">JMC</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">La performance sans sacrifier le luxe</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">4 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('jac')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1727,12 +1638,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">JAC</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">JAC</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">Une signature automobile qui impose le respect</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">4 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('isuzu')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1743,12 +1649,7 @@
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">ISUZU</text>
                         </svg>
                     </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">ISUZU</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">With you for the Long run</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">9 modèles</p>
-                    </div>
-                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal">
+                </div><div class="car-card crystal-effect luxury-border rounded-3xl overflow-hidden shadow-lg cursor-pointer particle-burst luxury-reveal" onclick="openBrandModal('voituredelocation')">
                     <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
                         <div class="golden-sparkles">
                             <div class="sparkle sparkle-1"></div>
@@ -1758,11 +1659,6 @@
                             <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" stroke-width="3"></circle>
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">VOITURE </text>
                         </svg>
-                    </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">voiture de location</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">les plus belles voitures d'occasion</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">1 modèles</p>
                     </div>
                 </div></div>
         </div>
@@ -3040,7 +2936,7 @@
                     <p class="text-gray-400">L'excellence automobile africaine à votre service</p>
                 </div>
                 
-                <div class="text-center md:text-left">
+                <div class="hidden md:block text-center md:text-left">
                     <h4 class="text-lg font-semibold mb-4">Contact</h4>
                     <div class="space-y-2 text-gray-400">
                         <a href="tel:+221769047999" class="flex items-center justify-start gap-2 hover:text-yellow-400 transition-colors">
@@ -3055,7 +2951,7 @@
                     </div>
                 </div>
                 
-                <div class="text-center md:text-left">
+                <div class="hidden md:block text-center md:text-left">
                     <h4 class="text-lg font-semibold mb-4">Services</h4>
                     <div class="space-y-2 text-gray-400">
                         <a href="#prestations" onclick="scrollTo('prestations')" class="block hover:text-yellow-400 transition-colors">Location Premium</a>
@@ -5000,11 +4896,6 @@ Merci !`;
                             <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" stroke-width="3"/>
                             <text x="50" y="55" text-anchor="middle" font-size="12" font-weight="bold">${brandData.name.substring(0, 8).toUpperCase()}</text>
                         </svg>
-                    </div>
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-bold text-gray-900 holographic-text">${brandData.name}</h3>
-                        <p class="text-sm text-gray-600 hidden md:block">${brandData.description}</p>
-                        <p class="text-xs text-gray-500 mt-1 hidden md:block">${brandData.models.length} modèles</p>
                     </div>
                 `;
                 
