@@ -499,178 +499,35 @@
 
             const shareData = {
                 title: `MON VÉHICULE : ${currentVehicle.marque} ${currentVehicle.modele}`,
-                text: `✨ Une opportunité à ne pas manquer chez MON VÉHICULE ! ✨
-
-Découvrez ce superbe ${currentVehicle.marque} ${currentVehicle.modele}.
-
-🔹 Année : ${currentVehicle.annee}
-🔹 Kilométrage : ${currentVehicle.kilometrage}
-🔹 Prix : ${currentVehicle.prix}
-
-Pour plus de détails et de photos, cliquez sur le lien !`,
+                text: `Découvrez ce superbe ${currentVehicle.marque} ${currentVehicle.modele} de ${currentVehicle.annee} chez MON VÉHICULE.\n\nPrix : ${currentVehicle.prix}\n${currentVehicle.description}`,
                 url: window.location.href,
             };
 
             try {
-                // 1. Générer l'image de partage personnalisée
-                alert("Préparation de l'image de partage, veuillez patienter...");
-                const shareFile = await generateShareImage(currentVehicle);
+                // Essayer de partager avec l'image originale
+                const response = await fetch(currentVehicle.image);
+                const blob = await response.blob();
+                const file = new File([blob], `${currentVehicle.id}.jpg`, { type: blob.type });
 
-                // 2. Partager l'image générée
-                if (navigator.canShare && navigator.canShare({ files: [shareFile] })) {
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     await navigator.share({
                         ...shareData,
-                        files: [shareFile],
+                        files: [file],
                     });
                 } else {
-                    // Fallback si le partage de fichier n'est pas supporté
+                    // Si le partage de fichier n'est pas supporté, partager sans l'image
                     await navigator.share(shareData);
                 }
             } catch (error) {
-                console.error('Erreur de partage:', error);
-                alert("Le partage a échoué. Votre navigateur n'est peut-être pas compatible. Vous pouvez copier le lien manuellement.");
-            }
-        }
-
-        /**
-         * Génère une image de partage personnalisée sur un canvas.
-         * @param {object} vehicle - L'objet contenant les détails du véhicule.
-         * @returns {Promise<File>} - Une promesse qui résout avec le fichier image généré.
-         */
-        async function generateShareImage(vehicle) {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const width = 1200;
-            const height = 630;
-            canvas.width = width;
-            canvas.height = height;
-
-            // --- Arrière-plan ---
-            ctx.fillStyle = '#1a1a1a'; // Noir/gris foncé du thème
-            ctx.fillRect(0, 0, width, height);
-
-            // --- Charger l'image du véhicule pour calculer ses dimensions ---
-            let vehicleImg;
-            try {
-                vehicleImg = new Image();
-                vehicleImg.crossOrigin = "anonymous";
-                vehicleImg.src = vehicle.image;
-                await new Promise((resolve, reject) => {
-                    vehicleImg.onload = resolve;
-                    vehicleImg.onerror = reject;
-                });
-            } catch (e) {
-                console.error("Impossible de charger l'image du véhicule pour le canvas", e);
-                vehicleImg = null; // Marquer l'image comme non chargée
-            }
-
-            // --- Dessiner l'image et le cadre ---
-            const padding = 20;
-            const imageAreaWidth = 750;
-            const imageAreaHeight = height - (padding * 2);
-
-            if (vehicleImg) {
-                const imgRatio = vehicleImg.width / vehicleImg.height;
-                const areaRatio = imageAreaWidth / imageAreaHeight;
-
-                let drawWidth, drawHeight, drawX, drawY;
-
-                if (imgRatio > areaRatio) { // Image plus large que la zone
-                    drawWidth = imageAreaWidth;
-                    drawHeight = drawWidth / imgRatio;
-                } else { // Image plus haute que la zone
-                    drawHeight = imageAreaHeight;
-                    drawWidth = drawHeight * imgRatio;
+                console.error('Erreur lors du partage avec image, tentative sans image:', error);
+                try {
+                    // Fallback : partager sans l'image si la première tentative échoue
+                    await navigator.share(shareData);
+                } catch (err) {
+                    console.error('Erreur de partage:', err);
+                    alert("Le partage n'est pas supporté sur votre navigateur. Vous pouvez copier le lien manuellement.");
                 }
-
-                drawX = padding + (imageAreaWidth - drawWidth) / 2;
-                drawY = padding + (imageAreaHeight - drawHeight) / 2;
-
-                // Dessiner le cadre doré autour de l'image
-                ctx.strokeStyle = '#d4af37';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(drawX - 5, drawY - 5, drawWidth + 10, drawHeight + 10);
-                
-                // Dessiner l'image
-                ctx.drawImage(vehicleImg, drawX, drawY, drawWidth, drawHeight);
-            } else {
-                // Dessiner un cadre de remplacement si l'image ne charge pas
-                ctx.strokeStyle = '#d4af37';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(padding, padding, imageAreaWidth, imageAreaHeight);
-                ctx.fillStyle = '#fff';
-                ctx.font = '30px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText("Image non disponible", padding + imageAreaWidth / 2, height / 2);
             }
-
-            // --- Zone de texte à droite ---
-            const textX = 800;
-
-            // --- Logo et Nom de la marque (plus luxueux) ---
-            try {
-                const logoImg = new Image();
-                logoImg.crossOrigin = "anonymous";
-                logoImg.src = 'https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg';
-                await new Promise((resolve, reject) => { logoImg.onload = resolve; logoImg.onerror = reject; });
-                ctx.drawImage(logoImg, textX, 40, 80, 80);
-            } catch (e) { console.error("Logo non chargé"); }
-
-            ctx.font = 'italic 38px "Times New Roman", serif';
-            ctx.fillStyle = '#d4af37';
-            ctx.textAlign = 'left';
-            ctx.fillText("MON VÉHICULE", textX + 100, 95);
-
-            // --- Titre du véhicule ---
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 48px sans-serif';
-            ctx.fillText(vehicle.marque, textX, 190);
-            ctx.font = 'bold 60px sans-serif';
-            ctx.fillText(vehicle.modele, textX, 250);
-
-            // --- Détails (Année, Km) ---
-            ctx.fillStyle = '#ccc';
-            ctx.font = '30px sans-serif';
-            ctx.fillText(`${vehicle.annee} • ${vehicle.kilometrage}`, textX, 300);
-
-            // --- Prix (plus frappant) ---
-            ctx.fillStyle = '#1a1a1a';
-            ctx.strokeStyle = '#d4af37';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.roundRect(textX - 10, 350, 380, 80, [10]);
-            ctx.fill();
-            ctx.stroke();
-            ctx.fillStyle = '#d4af37';
-            ctx.font = 'bold 48px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(vehicle.prix, textX + 180, 405);
-
-            // --- QR Code et Appel à l'action (plus pro) ---
-            const qrCodeUrl = window.location.href;
-            const qrContainer = document.createElement('div');
-            new QRCode(qrContainer, { text: qrCodeUrl, width: 100, height: 100 });
-            await new Promise(resolve => setTimeout(resolve, 200));
-            const qrImg = qrContainer.querySelector('img');
-            if (qrImg) {
-                ctx.drawImage(qrImg, textX, height - 140, 100, 100);
-            }
-
-            ctx.textAlign = 'left';
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 28px sans-serif';
-            ctx.fillText("Découvrez-le en détail", textX + 120, height - 110);
-            ctx.font = '22px sans-serif';
-            ctx.fillStyle = '#ccc';
-            ctx.fillText("Scannez ou cliquez sur le lien", textX + 120, height - 75);
-
-            // --- Convertir le canvas en fichier ---
-            return new Promise(resolve => {
-                canvas.toBlob(blob => {
-                    const file = new File([blob], `${vehicle.id}-share.png`, { type: 'image/png' });
-                    resolve(file);
-                }, 'image/png');
-            });
         }
 
         // --- Fonctions pour la modale de contact ---
