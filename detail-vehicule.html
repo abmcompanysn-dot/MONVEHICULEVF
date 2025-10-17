@@ -156,10 +156,12 @@
                     <span class="hidden sm:inline text-white text-xl font-bold">MON VÉHICULE</span>
                 </a>
                 <div class="flex items-center space-x-4">
-                    <a href="voitures-occasion.html" class="text-white hover:text-yellow-400 transition-colors">Nos Occasions</a>
-                    <a href="index.html" class="ultra-luxury-btn flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
-                        Retour
+                    <a href="voitures-occasion.html" class="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zM5.78 6.72a.75.75 0 011.06 0L10 9.94l3.16-3.22a.75.75 0 111.06 1.06L11.06 11l3.16 3.22a.75.75 0 11-1.06 1.06L10 12.06l-3.16 3.22a.75.75 0 01-1.06-1.06L8.94 11 5.78 7.78a.75.75 0 010-1.06z" clip-rule="evenodd" /></svg>
+                        Nos Occasions
+                    </a>
+                    <a href="index.html" title="Retour à l'accueil" class="bg-white/20 text-white hover:bg-white/30 rounded-full p-2 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                     </a>
                 </div>
             </div>
@@ -214,6 +216,23 @@
             <p id="loading-placeholder" class="text-center text-gray-500">Chargement des détails du véhicule...</p>
         </div>
     </main>
+
+    <!-- Section Partage QR Code (Mobile Uniquement) -->
+    <section id="qr-share-section" class="md:hidden py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Partagez cette Opportunité</h2>
+            <p class="text-gray-600 mb-6">Faites découvrir ce véhicule à vos contacts en scannant ce code.</p>
+            <div class="flex flex-col items-center gap-6">
+                <div id="page-qrcode" class="p-3 bg-white rounded-xl shadow-lg border">
+                    <!-- Le QR code sera généré ici par JavaScript -->
+                </div>
+                <button onclick="shareVehicle()" class="ultra-luxury-btn w-full max-w-xs flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" /></svg>
+                    Partager le lien
+                </button>
+            </div>
+        </div>
+    </section>
 
     <!-- Section "Véhicules Similaires" -->
     <section id="similar-vehicles-section" class="py-20 bg-gray-100 hidden">
@@ -432,6 +451,10 @@
                 const firstAccordionHeader = document.querySelector('.accordion-header');
                 if(firstAccordionHeader) firstAccordionHeader.click();
 
+                // Générer le QR code pour la section de partage mobile
+                const qrContainer = document.getElementById('page-qrcode');
+                if(qrContainer) new QRCode(qrContainer, { text: window.location.href, width: 160, height: 160 });
+
                 // Charger et afficher les véhicules similaires
                 loadSimilarVehicles(allVehicles, vehicle.marque, vehicle.id);
 
@@ -631,17 +654,25 @@
                 ctx.fillText("Contactez-nous au", centerX, height - 100);
                 ctx.fillText("+221 76 904 79 99", centerX, height - 60);
             } else {
-                // Version pour desktop : avec QR code
+                // Version pour desktop : avec QR code, numéro et slogan
                 const qrContainer = document.createElement('div');
                 new QRCode(qrContainer, { text: window.location.href, width: 120, height: 120 });
                 await new Promise(resolve => setTimeout(resolve, 200));
                 const qrImg = qrContainer.querySelector('img');
-                if (qrImg) ctx.drawImage(qrImg, textX + 80, height - 180, 120, 120);
+                if (qrImg) ctx.drawImage(qrImg, textX, height - 180, 120, 120);
+                
+                ctx.textAlign = 'left';
                 ctx.fillStyle = '#fff';
-                ctx.font = '22px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText("Scannez pour voir les détails", textX + 140, height - 40);
+                ctx.font = 'bold 24px sans-serif';
+                ctx.fillText("Contact : +221 76 904 79 99", textX + 135, height - 140);
+                ctx.font = '20px sans-serif';
+                ctx.fillStyle = '#ccc';
+                ctx.fillText("Scannez pour les détails", textX + 135, height - 110);
             }
+            ctx.font = 'italic 24px "Times New Roman", serif';
+            ctx.fillStyle = '#d4af37';
+            ctx.textAlign = 'center';
+            ctx.fillText("L'Excellence Automobile Africaine", textX + (width - textX) / 2, height - 35);
 
             // --- Convertir le canvas en fichier ---
             return new Promise(resolve => {
