@@ -13,6 +13,9 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
 
+    <!-- Librairie pour le QR Code -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
     <style>
         .holographic-text {
             /* ... (styles existants) ... */
@@ -512,30 +515,138 @@ Pour plus de détails et de photos, cliquez sur le lien !`,
             };
 
             try {
-                // Essayer de partager avec l'image
-                const response = await fetch(currentVehicle.image);
-                const blob = await response.blob();
-                const file = new File([blob], `${currentVehicle.id}.jpg`, { type: blob.type });
+                // 1. Générer l'image de partage personnalisée
+                alert("Préparation de l'image de partage, veuillez patienter...");
+                const shareFile = await generateShareImage(currentVehicle);
 
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                // 2. Partager l'image générée
+                if (navigator.canShare && navigator.canShare({ files: [shareFile] })) {
                     await navigator.share({
                         ...shareData,
-                        files: [file],
+                        files: [shareFile],
                     });
                 } else {
-                    // Si le partage de fichier n'est pas supporté, partager sans l'image
+                    // Fallback si le partage de fichier n'est pas supporté
                     await navigator.share(shareData);
                 }
             } catch (error) {
-                console.error('Erreur lors du partage avec image, tentative sans image:', error);
-                try {
-                    // Fallback : partager sans l'image si la première tentative échoue
-                    await navigator.share(shareData);
-                } catch (err) {
-                    console.error('Erreur de partage:', err);
-                    alert("Le partage n'est pas supporté sur votre navigateur. Vous pouvez copier le lien manuellement.");
-                }
+                console.error('Erreur de partage:', error);
+                alert("Le partage a échoué. Votre navigateur n'est peut-être pas compatible. Vous pouvez copier le lien manuellement.");
             }
+        }
+
+        /**
+         * Génère une image de partage personnalisée sur un canvas.
+         * @param {object} vehicle - L'objet contenant les détails du véhicule.
+         * @returns {Promise<File>} - Une promesse qui résout avec le fichier image généré.
+         */
+        async function generateShareImage(vehicle) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const width = 1200;
+            const height = 630;
+            canvas.width = width;
+            canvas.height = height;
+
+            // --- Arrière-plan ---
+            ctx.fillStyle = '#1a1a1a'; // Noir/gris foncé du thème
+            ctx.fillRect(0, 0, width, height);
+
+            // --- Bordure dorée ---
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 20;
+            ctx.strokeRect(0, 0, width, height);
+
+            // --- Charger et dessiner l'image du véhicule ---
+            try {
+                const vehicleImg = new Image();
+                vehicleImg.crossOrigin = "anonymous"; // Important pour les images hébergées sur un autre domaine
+                vehicleImg.src = vehicle.image;
+                await new Promise((resolve, reject) => {
+                    vehicleImg.onload = resolve;
+                    vehicleImg.onerror = reject;
+                });
+                ctx.drawImage(vehicleImg, 20, 20, 750, height - 40);
+            } catch (e) {
+                console.error("Impossible de charger l'image du véhicule pour le canvas", e);
+                // Dessiner un rectangle de remplacement si l'image ne charge pas
+                ctx.fillStyle = '#333';
+                ctx.fillRect(20, 20, 750, height - 40);
+                ctx.fillStyle = '#fff';
+                ctx.font = '30px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText("Image non disponible", 20 + 750 / 2, height / 2);
+            }
+
+            // --- Zone de texte à droite ---
+            const textX = 800;
+
+            // --- Logo ---
+            try {
+                const logoImg = new Image();
+                logoImg.crossOrigin = "anonymous";
+                logoImg.src = 'https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg';
+                await new Promise((resolve, reject) => { logoImg.onload = resolve; logoImg.onerror = reject; });
+                ctx.drawImage(logoImg, textX, 40, 80, 80);
+            } catch (e) { console.error("Logo non chargé"); }
+
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 42px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText("MON VÉHICULE", textX + 100, 100);
+
+            // --- Titre du véhicule ---
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 48px sans-serif';
+            ctx.fillText(vehicle.marque, textX, 190);
+            ctx.fillStyle = '#d4af37'; // Doré
+            ctx.font = 'bold 60px sans-serif';
+            ctx.fillText(vehicle.modele, textX, 250);
+
+            // --- Détails ---
+            ctx.fillStyle = '#fff';
+            ctx.font = '32px sans-serif';
+            const details = [
+                `Année: ${vehicle.annee}`,
+                `Km: ${vehicle.kilometrage}`,
+                `Prix: ${vehicle.prix}`
+            ];
+            details.forEach((detail, index) => {
+                ctx.fillText(detail, textX, 340 + (index * 50));
+            });
+
+            // --- QR Code ---
+            const qrContainer = document.createElement('div');
+            new QRCode(qrContainer, {
+                text: window.location.href,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+            });
+
+            // Attendre que le QR code soit généré
+            await new Promise(resolve => setTimeout(resolve, 200));
+            const qrImg = qrContainer.querySelector('img');
+            if (qrImg) {
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(textX, height - 170, 148, 148); // Fond blanc pour le QR code
+                ctx.drawImage(qrImg, textX + 10, height - 160, 128, 128);
+            }
+
+            ctx.fillStyle = '#fff';
+            ctx.font = '24px sans-serif';
+            ctx.fillText("Scannez pour voir", textX + 165, height - 110);
+            ctx.fillStyle = '#d4af37';
+            ctx.fillText("plus de détails !", textX + 165, height - 80);
+
+            // --- Convertir le canvas en fichier ---
+            return new Promise(resolve => {
+                canvas.toBlob(blob => {
+                    const file = new File([blob], `${vehicle.id}-share.png`, { type: 'image/png' });
+                    resolve(file);
+                }, 'image/png');
+            });
         }
 
         // --- Fonctions pour la modale de contact ---
