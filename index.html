@@ -4208,28 +4208,19 @@ Merci !`;
         }
 
         // Partager un modèle
-        function shareModel(event, brandName, modelName) {
-            event.stopPropagation(); // Empêche la modale de se fermer
-            const shareText = `Découvrez ce modèle sur MON VÉHICULE : ${brandName} ${modelName}.`;
-            const shareUrl = window.location.href;
+        function shareModel(event, brandName, modelName, modelImage) {
+            event.preventDefault();
+            event.stopPropagation();
+            const shareText = `Découvrez ce modèle chez MON VÉHICULE : ${brandName} ${modelName}.`;
+            const shareUrl = window.location.href; // Partage l'URL de la page d'accueil
+            const fullTextToCopy = `${shareText}\nVisitez notre site : ${shareUrl}`;
 
-            if (navigator.share) {
-                navigator.share({
-                    title: `MON VÉHICULE - ${brandName} ${modelName}`,
-                    text: shareText,
-                    url: shareUrl,
-                })
-                .then(() => console.log('Partage réussi.'))
-                .catch((error) => console.log('Erreur de partage:', error));
-            } else {
-                // Fallback pour les navigateurs qui ne supportent pas l'API Web Share
-                const fullTextToCopy = `${shareText}\nVisitez notre site : ${shareUrl}`;
-                navigator.clipboard.writeText(fullTextToCopy).then(() => {
-                    alert('Le lien et les informations du modèle ont été copiés ! Vous pouvez maintenant les coller pour partager.');
-                }, () => {
-                    alert('Erreur : Impossible de copier le lien.');
-                });
-            }
+            navigator.clipboard.writeText(fullTextToCopy).then(() => {
+                alert('Les informations du modèle ont été copiées dans le presse-papiers ! Vous pouvez maintenant les coller pour les partager.');
+            }).catch(err => {
+                console.error('Erreur lors de la copie : ', err);
+                alert('Impossible de copier les informations. Votre navigateur n\'est peut-être pas compatible.');
+            });
         }
 
         // Soumission du formulaire de contact
@@ -4575,12 +4566,12 @@ Merci de confirmer ce rendez-vous !`;
 
                 vehicles.slice(0, 5).forEach(vehicle => { 
                     const card = document.createElement('div');
-                    card.className = 'service-card crystal-effect luxury-border rounded-2xl overflow-hidden flex-shrink-0 w-80 group relative';
+                    card.className = 'service-card crystal-effect luxury-border rounded-2xl overflow-hidden flex-shrink-0 w-80 group relative'; // Correction de la classe
                     const detailUrl = `detail-vehicule.html?id=${vehicle.id}`;
                     const absoluteUrl = new URL(detailUrl, window.location.href).href;
 
                     card.innerHTML = `
-                        <button onclick="copyToClipboard('${absoluteUrl}', event)" title="Copier le lien de partage" class="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-all">
+                        <button onclick="shareOccasionVehicle(event, '${absoluteUrl}', '${vehicle.marque}', '${vehicle.modele}', '${vehicle.annee}', '${vehicle.prix}')" title="Partager ce véhicule" class="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <circle cx="6" cy="12" r="3"></circle>
