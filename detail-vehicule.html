@@ -13,9 +13,6 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
 
-    <!-- Librairie pour le QR Code -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
     <style>
         .holographic-text {
             /* ... (styles existants) ... */
@@ -552,36 +549,65 @@ Pour plus de détails et de photos, cliquez sur le lien !`,
             ctx.fillStyle = '#1a1a1a'; // Noir/gris foncé du thème
             ctx.fillRect(0, 0, width, height);
 
-            // --- Bordure dorée ---
-            ctx.strokeStyle = '#d4af37';
-            ctx.lineWidth = 20;
-            ctx.strokeRect(0, 0, width, height);
-
-            // --- Charger et dessiner l'image du véhicule ---
+            // --- Charger l'image du véhicule pour calculer ses dimensions ---
+            let vehicleImg;
             try {
-                const vehicleImg = new Image();
-                vehicleImg.crossOrigin = "anonymous"; // Important pour les images hébergées sur un autre domaine
+                vehicleImg = new Image();
+                vehicleImg.crossOrigin = "anonymous";
                 vehicleImg.src = vehicle.image;
                 await new Promise((resolve, reject) => {
                     vehicleImg.onload = resolve;
                     vehicleImg.onerror = reject;
                 });
-                ctx.drawImage(vehicleImg, 20, 20, 750, height - 40);
             } catch (e) {
                 console.error("Impossible de charger l'image du véhicule pour le canvas", e);
-                // Dessiner un rectangle de remplacement si l'image ne charge pas
-                ctx.fillStyle = '#333';
-                ctx.fillRect(20, 20, 750, height - 40);
+                vehicleImg = null; // Marquer l'image comme non chargée
+            }
+
+            // --- Dessiner l'image et le cadre ---
+            const padding = 20;
+            const imageAreaWidth = 750;
+            const imageAreaHeight = height - (padding * 2);
+
+            if (vehicleImg) {
+                const imgRatio = vehicleImg.width / vehicleImg.height;
+                const areaRatio = imageAreaWidth / imageAreaHeight;
+
+                let drawWidth, drawHeight, drawX, drawY;
+
+                if (imgRatio > areaRatio) { // Image plus large que la zone
+                    drawWidth = imageAreaWidth;
+                    drawHeight = drawWidth / imgRatio;
+                } else { // Image plus haute que la zone
+                    drawHeight = imageAreaHeight;
+                    drawWidth = drawHeight * imgRatio;
+                }
+
+                drawX = padding + (imageAreaWidth - drawWidth) / 2;
+                drawY = padding + (imageAreaHeight - drawHeight) / 2;
+
+                // Dessiner le cadre doré autour de l'image
+                ctx.strokeStyle = '#d4af37';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(drawX - 5, drawY - 5, drawWidth + 10, drawHeight + 10);
+                
+                // Dessiner l'image
+                ctx.drawImage(vehicleImg, drawX, drawY, drawWidth, drawHeight);
+            } else {
+                // Dessiner un cadre de remplacement si l'image ne charge pas
+                ctx.strokeStyle = '#d4af37';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(padding, padding, imageAreaWidth, imageAreaHeight);
                 ctx.fillStyle = '#fff';
                 ctx.font = '30px sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText("Image non disponible", 20 + 750 / 2, height / 2);
+                ctx.fillText("Image non disponible", padding + imageAreaWidth / 2, height / 2);
             }
 
             // --- Zone de texte à droite ---
             const textX = 800;
 
-            // --- Logo ---
+            // --- Logo et Nom de la marque (plus luxueux) ---
             try {
                 const logoImg = new Image();
                 logoImg.crossOrigin = "anonymous";
@@ -590,55 +616,53 @@ Pour plus de détails et de photos, cliquez sur le lien !`,
                 ctx.drawImage(logoImg, textX, 40, 80, 80);
             } catch (e) { console.error("Logo non chargé"); }
 
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 42px sans-serif';
+            ctx.font = 'italic 38px "Times New Roman", serif';
+            ctx.fillStyle = '#d4af37';
             ctx.textAlign = 'left';
-            ctx.fillText("MON VÉHICULE", textX + 100, 100);
+            ctx.fillText("MON VÉHICULE", textX + 100, 95);
 
             // --- Titre du véhicule ---
             ctx.fillStyle = '#fff';
             ctx.font = 'bold 48px sans-serif';
             ctx.fillText(vehicle.marque, textX, 190);
-            ctx.fillStyle = '#d4af37'; // Doré
             ctx.font = 'bold 60px sans-serif';
             ctx.fillText(vehicle.modele, textX, 250);
 
-            // --- Détails ---
-            ctx.fillStyle = '#fff';
-            ctx.font = '32px sans-serif';
-            const details = [
-                `Année: ${vehicle.annee}`,
-                `Km: ${vehicle.kilometrage}`,
-                `Prix: ${vehicle.prix}`
-            ];
-            details.forEach((detail, index) => {
-                ctx.fillText(detail, textX, 340 + (index * 50));
-            });
+            // --- Détails (Année, Km) ---
+            ctx.fillStyle = '#ccc';
+            ctx.font = '30px sans-serif';
+            ctx.fillText(`${vehicle.annee} • ${vehicle.kilometrage}`, textX, 300);
 
-            // --- QR Code ---
+            // --- Prix (plus frappant) ---
+            ctx.fillStyle = '#1a1a1a';
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.roundRect(textX - 10, 350, 380, 80, [10]);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = '#d4af37';
+            ctx.font = 'bold 48px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(vehicle.prix, textX + 180, 405);
+
+            // --- QR Code et Appel à l'action (plus pro) ---
+            const qrCodeUrl = window.location.href;
             const qrContainer = document.createElement('div');
-            new QRCode(qrContainer, {
-                text: window.location.href,
-                width: 128,
-                height: 128,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-            });
-
-            // Attendre que le QR code soit généré
+            new QRCode(qrContainer, { text: qrCodeUrl, width: 100, height: 100 });
             await new Promise(resolve => setTimeout(resolve, 200));
             const qrImg = qrContainer.querySelector('img');
             if (qrImg) {
-                ctx.fillStyle = '#fff';
-                ctx.fillRect(textX, height - 170, 148, 148); // Fond blanc pour le QR code
-                ctx.drawImage(qrImg, textX + 10, height - 160, 128, 128);
+                ctx.drawImage(qrImg, textX, height - 140, 100, 100);
             }
 
+            ctx.textAlign = 'left';
             ctx.fillStyle = '#fff';
-            ctx.font = '24px sans-serif';
-            ctx.fillText("Scannez pour voir", textX + 165, height - 110);
-            ctx.fillStyle = '#d4af37';
-            ctx.fillText("plus de détails !", textX + 165, height - 80);
+            ctx.font = 'bold 28px sans-serif';
+            ctx.fillText("Découvrez-le en détail", textX + 120, height - 110);
+            ctx.font = '22px sans-serif';
+            ctx.fillStyle = '#ccc';
+            ctx.fillText("Scannez ou cliquez sur le lien", textX + 120, height - 75);
 
             // --- Convertir le canvas en fichier ---
             return new Promise(resolve => {
