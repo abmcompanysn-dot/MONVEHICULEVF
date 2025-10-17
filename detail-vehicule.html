@@ -622,9 +622,13 @@
             ctx.fillStyle = '#d4af37';
             ctx.fillText("MON VÉHICULE", textX + 85, 85);
 
+            // --- Titre du véhicule ---
             // --- Titre du véhicule (Marque en évidence, Modèle en or) ---
             ctx.fillStyle = '#fff';
+            ctx.font = 'bold 42px sans-serif';
+            ctx.fillText(vehicle.marque, textX, 170);
             ctx.font = 'bold 52px sans-serif';
+            ctx.fillText(vehicle.modele, textX, 225);
             ctx.fillText(vehicle.marque, textX, 160);
             ctx.fillStyle = '#d4af37';
             ctx.font = 'bold 64px sans-serif';
@@ -633,8 +637,11 @@
             // --- Détails ---
             ctx.font = '28px sans-serif';
             ctx.fillStyle = '#ccc';
+            ctx.fillText(`${vehicle.annee} • ${vehicle.kilometrage}`, textX, 270);
             ctx.fillText(`${vehicle.annee} • ${vehicle.kilometrage}`, textX, 265);
             ctx.fillStyle = '#d4af37';
+            ctx.font = 'bold 44px sans-serif';
+            ctx.fillText(vehicle.prix, textX, 340);
             ctx.font = 'bold 48px sans-serif';
             ctx.fillText(vehicle.prix, textX, 330);
 
@@ -648,10 +655,13 @@
 
                 ctx.font = 'italic 28px "Times New Roman", serif';
                 ctx.fillStyle = '#d4af37';
+                ctx.fillText("Une opportunité à saisir !", centerX, height - 150);
                 ctx.fillText("Une opportunité à saisir !", centerX, height - 140);
 
                 ctx.font = 'bold 32px sans-serif';
                 ctx.fillStyle = '#fff';
+                ctx.fillText("Contactez-nous au", centerX, height - 100);
+                ctx.fillText("+221 76 904 79 99", centerX, height - 60);
                 ctx.fillText("Contactez-nous au", centerX, height - 95);
                 ctx.fillText("+221 76 904 79 99", centerX, height - 55);
             } else {
@@ -665,9 +675,11 @@
                 ctx.textAlign = 'left';
                 ctx.fillStyle = '#fff';
                 ctx.font = 'bold 24px sans-serif';
+                ctx.fillText("Contact : +221 76 904 79 99", textX + 135, height - 140);
                 ctx.fillText("Contact : +221 76 904 79 99", textX + 135, height - 135);
                 ctx.font = '20px sans-serif';
                 ctx.fillStyle = '#ccc';
+                ctx.fillText("Scannez pour les détails", textX + 135, height - 110);
                 ctx.fillText("Scannez pour les détails", textX + 135, height - 105);
             }
             ctx.font = 'italic 24px "Times New Roman", serif';
@@ -773,4 +785,5 @@ Je suis intéressé(e) par le modèle :
     </script>
 </body>
 </html>
+                    
                     
