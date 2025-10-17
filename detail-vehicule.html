@@ -13,10 +13,10 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
 
+    <!-- Librairie pour le QR Code -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
     <style>
-        .holographic-text {
-            /* ... (styles existants) ... */
-        }
         .holographic-text {
             background: linear-gradient(45deg, #8b7355 0%, #a0926b 25%, #d4af37 50%, #a0926b 75%, #8b7355 100%);
             background-size: 200% 200%;
@@ -503,13 +503,228 @@
                 url: window.location.href,
             };
 
-            try {
-                // Essayer de partager avec l'image originale
-                const response = await fetch(currentVehicle.image);
-                const blob = await response.blob();
-                const file = new File([blob], `${currentVehicle.id}.jpg`, { type: blob.type });
+            // Tenter le partage natif avec l'image générée
+            if (navigator.share) {
+                try {
+                    alert("Préparation de l'image de partage, veuillez patienter...");
+                    const shareFile = await generateShareImage(currentVehicle);
 
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    if (navigator.canShare && navigator.canShare({ files: [shareFile] })) {
+                        await navigator.share({
+                            files: [shareFile],
+                            title: shareData.title,
+                            text: shareData.text, // Le texte sera utilisé par certaines apps, l'image par d'autres
+                            url: shareData.url,
+                        });
+                    } else {
+                        // Si le partage de fichier n'est pas supporté, partager le texte et le lien
+                        await navigator.share(shareData);
+                    }
+                } catch (error) {
+                    console.error('Erreur de partage:', error);
+                    // Fallback en cas d'erreur (ex: partage annulé)
+                    alert("Le partage a été annulé ou a échoué.");
+                }
+            } else {
+                // Fallback pour les navigateurs qui ne supportent pas du tout le partage
+                alert("Le partage n'est pas supporté sur votre navigateur. Vous pouvez copier le lien manuellement.");
+            }
+        }
+
+        /**
+         * Génère une image de partage personnalisée sur un canvas.
+         * @param {object} vehicle - L'objet contenant les détails du véhicule.
+         * @returns {Promise<File>} - Une promesse qui résout avec le fichier image généré.
+         */
+        async function generateShareImage(vehicle) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const width = 1200;
+            const height = 630;
+            canvas.width = width;
+            canvas.height = height;
+
+            // --- Arrière-plan et bordure générale ---
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(0, 0, width, height);
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(1, 1, width - 2, height - 2);
+
+            // --- Charger l'image du véhicule pour la dessiner sans la déformer ---
+            const imageAreaWidth = 780;
+            const imageAreaHeight = height - 40;
+            const padding = 20;
+
+            try {
+                const vehicleImg = new Image();
+                vehicleImg.crossOrigin = "anonymous";
+                vehicleImg.src = vehicle.image;
+                await new Promise((resolve, reject) => { vehicleImg.onload = resolve; vehicleImg.onerror = reject; });
+
+                const imgRatio = vehicleImg.width / vehicleImg.height;
+                const areaRatio = imageAreaWidth / imageAreaHeight;
+                let drawWidth, drawHeight, drawX, drawY;
+
+                // Calcul pour "fit" l'image dans la zone, en conservant son ratio
+                if (imgRatio > areaRatio) {
+                    drawWidth = imageAreaWidth;
+                    drawHeight = drawWidth / imgRatio;
+                } else {
+                    drawHeight = imageAreaHeight;
+                    drawWidth = drawHeight * imgRatio;
+                }
+                drawX = padding + (imageAreaWidth - drawWidth) / 2;
+                drawY = padding + (imageAreaHeight - drawHeight) / 2;
+
+                // Dessiner l'image
+                ctx.drawImage(vehicleImg, drawX, drawY, drawWidth, drawHeight);
+
+            } catch (e) {
+                console.error("Impossible de charger l'image du véhicule pour le canvas", e);
+            }
+
+            // --- Zone de texte à droite ---
+            const textX = 820;
+            ctx.fillStyle = '#fff';
+            ctx.textAlign = 'left';
+
+            // --- Logo et Nom de la marque ---
+            const logoImg = new Image();
+            logoImg.crossOrigin = "anonymous";
+            logoImg.src = 'https://i.postimg.cc/FhccT3BF/logo-mon-vehicule.jpg';
+            await new Promise(resolve => { logoImg.onload = resolve; });
+            ctx.drawImage(logoImg, textX, 40, 70, 70);
+            ctx.font = 'italic 32px "Times New Roman", serif';
+            ctx.fillStyle = '#d4af37';
+            ctx.fillText("MON VÉHICULE", textX + 85, 85);
+
+            // --- Titre du véhicule ---
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 42px sans-serif';
+            ctx.fillText(vehicle.marque, textX, 170);
+            ctx.font = 'bold 52px sans-serif';
+            ctx.fillText(vehicle.modele, textX, 225);
+
+            // --- Détails ---
+            ctx.font = '28px sans-serif';
+            ctx.fillStyle = '#ccc';
+            ctx.fillText(`${vehicle.annee} • ${vehicle.kilometrage}`, textX, 270);
+            ctx.fillStyle = '#d4af37';
+            ctx.font = 'bold 44px sans-serif';
+            ctx.fillText(vehicle.prix, textX, 340);
+
+            // --- QR Code ---
+            const qrContainer = document.createElement('div');
+            new QRCode(qrContainer, { text: window.location.href, width: 120, height: 120 });
+            await new Promise(resolve => setTimeout(resolve, 200));
+            const qrImg = qrContainer.querySelector('img');
+            if (qrImg) {
+                ctx.drawImage(qrImg, textX + 80, height - 180, 120, 120);
+            }
+            ctx.fillStyle = '#fff';
+            ctx.font = '22px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText("Scannez pour voir les détails", textX + 140, height - 40);
+
+            // --- Convertir le canvas en fichier ---
+            return new Promise(resolve => {
+                canvas.toBlob(blob => {
+                    const file = new File([blob], `${vehicle.id}-share.png`, { type: 'image/png' });
+                    resolve(file);
+                }, 'image/png');
+            });
+        }
+
+        // --- Fonctions pour la modale de contact ---
+
+        function openContactForVehicle(marque, modele) {
+            const modal = document.getElementById('contact-modal');
+            const title = document.getElementById('contact-modal-title');
+            const hiddenInput = document.getElementById('vehicle-details-for-form');
+
+            title.innerText = `Contacter pour : ${marque} ${modele}`;
+            hiddenInput.value = `${marque} ${modele}`; // Stocke les détails pour la soumission
+
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contact-modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const phone = formData.get('phone');
+            const email = formData.get('email');
+            const userMessage = formData.get('message');
+            const vehicleDetails = formData.get('vehicle_details');
+            
+            // Récupérer la marque et le modèle depuis les données du véhicule actuel
+            const marque = currentVehicle ? currentVehicle.marque : 'N/A';
+            const modele = currentVehicle ? currentVehicle.modele : 'N/A';
+
+            let whatsappMessage = `*Bonjour MON VÉHICULE !*
+
+Je suis intéressé(e) par le modèle :
+
+  *Marque :* ${marque}
+  *Modèle :* ${modele}
+
+*Mes coordonnées :*
+  *Nom :* ${name}
+  *Téléphone :* ${phone}`
+
+            if (email) {
+                whatsappMessage += `\n  *Email :* ${email}`;
+            }
+
+            if (userMessage) {
+                whatsappMessage += `\n\n*Message supplémentaire :*\n${userMessage}`;
+            }
+
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappNumber = "221769047999";
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            const leadData = {
+                type: 'Contact Véhicule Occasion',
+                name: name,
+                phone: phone,
+                email: email || '',
+                details: `Véhicule: ${vehicleDetails}`,
+                message: userMessage || 'Pas de message supplémentaire.'
+            };
+
+            logAndOpenWhatsApp(leadData, whatsappURL);
+
+            event.target.reset();
+            closeContactModal();
+            alert(`Merci ${name} ! WhatsApp va s'ouvrir avec votre message.`);
+        }
+
+        document.addEventListener('DOMContentLoaded', loadVehicleDetails);
+
+        // Enregistrement du Service Worker pour la PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker enregistré avec succès:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('🔥 Échec de l\'enregistrement du Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
                     await navigator.share({
                         ...shareData,
                         files: [file],
