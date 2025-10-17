@@ -614,18 +614,34 @@
             ctx.font = 'bold 44px sans-serif';
             ctx.fillText(vehicle.prix, textX, 340);
 
-            // --- QR Code ---
-            const qrContainer = document.createElement('div');
-            new QRCode(qrContainer, { text: window.location.href, width: 120, height: 120 });
-            await new Promise(resolve => setTimeout(resolve, 200));
-            const qrImg = qrContainer.querySelector('img');
-            if (qrImg) {
-                ctx.drawImage(qrImg, textX + 80, height - 180, 120, 120);
+            // --- Contenu dynamique : QR Code sur Desktop, Infos sur Mobile ---
+            const isMobile = window.innerWidth < 768;
+
+            if (isMobile) {
+                // Version pour mobile : pas de QR code, mais des infos directes
+                ctx.textAlign = 'center';
+                const centerX = textX + (width - textX) / 2;
+
+                ctx.font = 'italic 28px "Times New Roman", serif';
+                ctx.fillStyle = '#d4af37';
+                ctx.fillText("Une opportunité à saisir !", centerX, height - 150);
+
+                ctx.font = 'bold 32px sans-serif';
+                ctx.fillStyle = '#fff';
+                ctx.fillText("Contactez-nous au", centerX, height - 100);
+                ctx.fillText("+221 76 904 79 99", centerX, height - 60);
+            } else {
+                // Version pour desktop : avec QR code
+                const qrContainer = document.createElement('div');
+                new QRCode(qrContainer, { text: window.location.href, width: 120, height: 120 });
+                await new Promise(resolve => setTimeout(resolve, 200));
+                const qrImg = qrContainer.querySelector('img');
+                if (qrImg) ctx.drawImage(qrImg, textX + 80, height - 180, 120, 120);
+                ctx.fillStyle = '#fff';
+                ctx.font = '22px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText("Scannez pour voir les détails", textX + 140, height - 40);
             }
-            ctx.fillStyle = '#fff';
-            ctx.font = '22px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText("Scannez pour voir les détails", textX + 140, height - 40);
 
             // --- Convertir le canvas en fichier ---
             return new Promise(resolve => {
