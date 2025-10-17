@@ -614,18 +614,28 @@
             ctx.font = 'bold 44px sans-serif';
             ctx.fillText(vehicle.prix, textX, 340);
 
-            // --- QR Code ---
+            // --- QR Code et Appel à l'action ---
             const qrContainer = document.createElement('div');
-            new QRCode(qrContainer, { text: window.location.href, width: 120, height: 120 });
+            new QRCode(qrContainer, { text: window.location.href, width: 110, height: 110, colorLight: "#1a1a1a", colorDark: "#ffffff" });
             await new Promise(resolve => setTimeout(resolve, 200));
             const qrImg = qrContainer.querySelector('img');
             if (qrImg) {
-                ctx.drawImage(qrImg, textX + 80, height - 180, 120, 120);
+                ctx.drawImage(qrImg, textX, height - 170, 110, 110);
             }
+
+            ctx.textAlign = 'left';
             ctx.fillStyle = '#fff';
-            ctx.font = '22px sans-serif';
+            ctx.font = 'bold 24px sans-serif';
+            ctx.fillText("Scannez pour découvrir", textX + 125, height - 140);
+            ctx.fillStyle = '#ccc';
+            ctx.font = '20px sans-serif';
+            ctx.fillText("ce modèle exclusif.", textX + 125, height - 110);
+
+            // --- Phrase d'accroche en bas ---
+            ctx.font = 'italic 24px "Times New Roman", serif';
+            ctx.fillStyle = '#d4af37';
             ctx.textAlign = 'center';
-            ctx.fillText("Scannez pour voir les détails", textX + 140, height - 40);
+            ctx.fillText("L'Excellence Automobile Africaine", width - 195, height - 35);
 
             // --- Convertir le canvas en fichier ---
             return new Promise(resolve => {
